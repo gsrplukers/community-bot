@@ -19,6 +19,16 @@ client.once("ready", () => {
   console.log(`Bot is online as ${client.user.tag}`);
 });
 
+client.on("guildMemberAdd", (member) => {
+  const channel = member.guild.channels.cache.find(
+    ch => ch.name === "welcome"
+  );
+
+  if (!channel) return;
+
+  channel.send(`Welcome to the server, ${member}! Please read the rules.`);
+});
+
 client.on("messageCreate", async (message) => {
   if (message.author.bot) return;
 
